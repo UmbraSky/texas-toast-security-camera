@@ -9,6 +9,7 @@
 # Circuitry Component for PiCamera 
 
 # Notes to Self: Create Diagram for Circuit 
+#                Possibly Enable an alarm system
 
 
 # Code that will activate the green light whenever the program begins running
