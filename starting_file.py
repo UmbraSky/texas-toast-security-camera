@@ -40,5 +40,58 @@
      # Print message to the terminal "Are you sure you want to terminate the program?"
 
      # Yellow Light Code stops running if answer is not given in time, but if button is clicked again, program stops
+    
+    
+# Start of Code:
+
+import RPi.GPIO as GPIO
+import time
+import sys
+import signal
+import json
+
+greenled =                           # add corresponding led numbers
+redled =
+blueled =
+yellowled =
+
+leds = [greenled, redled, blueled, yellowled]
+
+greenButton =                       # add corresponding button numbers
+redButton =
+blueButton =
+yellowButton =
+
+buttons = [greenButton, redButton, blueButton, yellowButton]
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(leds, GPIO.OUT)
+GPIO.setup(buttons, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+while True:
+    if (GPIO.input(greenButton) == GPIO.HIGH):
+        GPIO.output(greenled, GPIO.HIGH)
+        print("System Restarting...")
+    else:
+        GPIO.output(greenled, GPIO.LOW)
+        
+    if (GPIO.input(redButton) == GPIO.HIGH):
+        GPIO.output(redled, GPIO.HIGH)
+    else:
+        GPIO.output(redled, GPIO.LOW)
+        
+    if (GPIO.input(blueButton) == GPIO.HIGH):
+        GPIO.output(blueled, GPIO.HIGH)
+    else:
+        GPIO.output(blueled, GPIO.LOW)
+        
+    if (GPIO.input(yellowButton) == GPIO.HIGH):
+        GPIO.output(yellowled, GPIO.HIGH)
+        print("Are you sure you want to terminate the system?")
+    else:
+        GPIO.output(yellowled, GPIO.LOW)
+        
+
+
 
 
