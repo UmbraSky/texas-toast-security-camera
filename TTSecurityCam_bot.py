@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, Messa
 from secret_files import TelegramIDs
 # Telegram bot to send notifications to Telegram account for detections
 
-updater = Updater(TelegramIDs.telegram_data["bot_api_token"])
+updater = Updater(TelegramIDs.telegram_data["bot_api_token"], 0)
 bot = updater.bot
 
 ownerIDs = TelegramIDs.telegram_data["owner_ids"]
