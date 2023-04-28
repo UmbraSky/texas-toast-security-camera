@@ -4,6 +4,9 @@ app = Flask(__name__)
 
 app.secret_key = "jlsakdjflk;asjdfllhi"
 
-app.route("/")
+@app.route("/")
 def main():
-    return render_template("GUI.html")
+    return "flask app is running"
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1")
