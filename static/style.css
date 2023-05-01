@@ -1,0 +1,374 @@
+html{
+    --footageWidth:60vw;
+    --footageHeight:60vh;
+    --mainTopMargin:5vh;
+}
+
+body{
+    position:absolute;
+    top:0px;
+    width:100vw;
+    height:100vh;
+    margin:0px;
+}
+
+#footageContainer{
+    background-color:black;
+    height:var(--footageHeight);
+    width:var(--footageWidth);
+    margin-left: calc(50% - (0.5 * var(--footageWidth)));
+    margin-top:var(--mainTopMargin);
+}
+
+#controlsContainer{
+    display:flex;
+    flex-direction:row;
+    height:calc(100vh - var(--mainTopMargin) - var(--footageHeight));
+    width:calc(var(--footageWidth) + (0.5 * (100vw - var(--footageWidth))));
+    margin-left:calc(100vw - (var(--footageWidth) + (0.5 * (100vw - var(--footageWidth)))))
+}
+
+#leftControls{
+    width: var(--footageWidth);
+    height:100%
+}
+
+#leftCenteredControls{
+    width: 80%;
+    height:100%;
+    margin-left:10%;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
+
+#rightControls{
+    width:calc(0.5 * (100vw - var(--footageWidth)));
+    height:100%;
+}
+
+#rightPositionedControls{
+    width:calc(0.7 * (0.5 * (100vw - var(--footageWidth))));
+    height:calc(0.7 * (0.5 * (100vw - var(--footageWidth))));
+    margin-left:8%;
+    margin-top:8%;
+}
+
+.midButton{
+    background-color: gray;
+    width:20%;
+    height:25%;
+}
+
+.midButton:focus{
+    box-shadow: 0px 0px 15px cyan;
+}
+
+.midButton:active{
+    background-color:white;
+}
+
+#slider{
+    width:100%;
+    height:20%;
+    margin-top:1%;
+    margin-bottom:1%;
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    width:85%;
+    height:8%;
+    background-color: black;
+    border-radius:50%;
+}
+
+input[type=range]:focus{
+    outline:none
+}
+
+input[type=range]:focus::-webkit-slider-thumb{
+    height:1550%;
+    width:3%;
+    box-shadow: 0px 0px 15px cyan;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+     appearance: none;
+  
+     /*custom styles*/
+     background-color: #5cd5eb;
+     border-radius:50%;
+     height: 1250%;
+     width: 2%;
+  }
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+    border: none; /*Removes extra border that FF applies*/
+ 
+    /*custom styles*/
+    background-color: #5cd5eb;
+    border-radius: 50%;
+    height: 1250%;
+    width: 1%;
+ }
+
+
+
+#panBtnCircle{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background-color:yellow;
+    overflow:hidden;
+    position:relative;
+    z-index:5;
+}
+
+.panBtn{
+    position:absolute;
+    border:none;
+    overflow:visible;
+}
+
+#panUpBtn{
+    height:calc(0.5 * (100% - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    width:calc((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097);
+    left: calc(0.5 * (100% - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    background-color: blue;
+}
+
+#panUpBtn::after{
+    width:0px;
+    height:0px;
+    position:absolute;
+    top:calc(0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    left:0px;
+    border-color:blue;
+    border-style:solid;
+    border-width:calc(0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - (2 * (0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097))))));
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom:transparent;
+    content: "";
+    z-index:1;
+}
+
+#panDownBtn{
+    height:calc(0.5 * (100% - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    width:calc((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097);
+    left: calc(0.5 * (100% - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    background-color: cyan;
+    bottom:0px;
+}
+
+#panDownBtn::after{
+    width:0px;
+    height:0px;
+    position:absolute;
+    bottom:calc(0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    left:0px;
+    border-color:cyan;
+    border-style:solid;
+    border-width:calc(0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - (2 * (0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097))))));
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top:transparent;
+    content: "";
+    z-index:1;
+}
+
+#panLeftBtn{
+    height:calc((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097);
+    width:calc(0.5 * (100% - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    top: calc(0.5 * (100% - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    background-color: cornflowerblue;
+}
+
+#panLeftBtn::after{
+    width:0px;
+    height:0px;
+    position:absolute;
+    left:calc(0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    top:0px;
+    border-color: cornflowerblue;
+    border-style:solid;
+    border-width:calc(0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - (2 * (0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097))))));
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-right:transparent;
+    content: "";
+    z-index:1;
+}
+
+#panRightBtn{
+    height:calc((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097);
+    width:calc(0.5 * (100% - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    top: calc(0.5 * (100% - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    background-color: cadetblue;
+    right:0px;
+}
+
+#panRightBtn::after{
+    width:0px;
+    height:0px;
+    position:absolute;
+    right:calc(0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097)));
+    top:0px;
+    border-color: cadetblue;
+    border-style:solid;
+    border-width:calc(0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - (2 * (0.5 * ((0.7 * (0.5 * (100vw - var(--footageWidth)))) - ((0.5 * (0.7 * (0.5 * (100vw - var(--footageWidth))))) * 1.4142135623730950488016887242097))))));
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left:transparent;
+    content: "";
+    z-index:1;
+}
+
+
+.icons{
+    width:7vh;
+    height:7vh;
+    position:absolute;
+    z-index:3;
+}
+
+#rightArrow{
+    right:2.5vw;
+}
+
+#downArrow{
+    bottom:3vh;
+}
+
+#settingsBtn{
+    position:absolute;
+    top:1%;
+    right:1%;
+    padding:0px;
+    border:none;
+}
+
+#hamberger{
+    position:absolute;
+    top:1%;
+    left:1%;
+    padding:0px;
+    border:none;
+}
+
+button{
+    border:none;
+}
+
+#sideShelf{
+    width:25vw;
+    height:100vh;
+    position:absolute;
+    background-color:darkgray;
+    top:0px;
+    left:0px;
+    z-index:7;
+}
+
+.closeBtn{
+    position:absolute;
+    right:2%;
+    top:1%;
+    padding:0px;
+}
+
+#topSection{
+    height:18%;
+    width:100%;
+}
+
+#topTopSection{
+    height:50%;
+    width:100%;
+}
+
+#searchContainer{
+    height:50%;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+h1{
+    margin:0px;
+    padding:4%;
+}
+
+#SearchField{
+    height:50%;
+    width:70%;
+}
+
+#searchIcon{
+    width:4vh;
+    height:4vh;
+    padding:2%;
+}
+
+#scrollDiv{
+    background-color: gray;
+    width:90%;
+    height:72%;
+    margin:auto;
+    overflow-y:scroll;
+}
+
+
+
+
+
+
+
+
+
+@media all and (orientation:landscape){
+    .icons{
+        width:7vh;
+        height:7vh;
+        position:relative;
+        z-index:3;
+    }
+
+    #rightArrow{
+        right:2.5vw;
+    }
+    
+    #downArrow{
+        bottom:3vh;
+    }
+}
+
+@media all and (orientation:portrait){
+    .icons{
+        width:5vw;
+        height:5vw;
+        position:relative;
+        z-index:3;
+    }
+
+    #rightArrow{
+        right:3vw;
+    }
+    
+    #downArrow{
+        bottom:3vw;
+    }
+}
+

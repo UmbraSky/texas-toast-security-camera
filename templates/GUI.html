@@ -1,1 +1,113 @@
-<p>main page test</p>
+<html>
+  <head>
+    <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>Main Page</title>
+  </head>
+  <body>
+    <div id="footageContainer">
+      <video id="footage"></video>
+    </div>
+    <div id="controlsContainer">
+      <div id="leftControls">
+        <div id="leftCenteredControls">
+          <button class="midButton" id="recordingToggle">
+            <img class="icons" src="{{url_for('static', filename='notRecording.png')}}">
+          </button>
+          <div id="slider">
+            <button id="zOut" onclick="zoomOut()">
+              <img class="icons" src="{{url_for('static', filename='zoomOut.png')}}">
+            </button>
+            <input id="zoom" type="range" min="0" max="200" value="100">
+            <button id="zIn" onclick="zoomIn()">
+              <img class="icons" src="{{url_for('static', filename='zoomIn.png')}}">
+            </button>
+          </div>
+          <button class="midButton" id="armToggle">
+            <img class="icons" src="{{url_for('static', filename='siren.png')}}">
+          </button>
+
+        </div>
+      </div>
+      <div id="rightControls">
+        <div id="rightPositionedControls">
+          <div id="panBtnCircle">
+            <button class="panBtn" id="panUpBtn">
+              <img id="upArrow" class="icons" src="{{url_for('static', filename='upArrow.png')}}">
+            </button>
+            <button class="panBtn" id="panDownBtn">
+              <img id="downArrow" class="icons" src="{{url_for('static', filename='downArrow.png')}}">
+            </button>
+            <button class="panBtn" id="panLeftBtn">
+              <img id="leftArrow" class="icons" src="{{url_for('static', filename='leftArrow.png')}}">
+            </button>
+            <button class="panBtn" id="panRightBtn">
+              <img id="rightArrow" class="icons" src="{{url_for('static', filename='rightArrow.png')}}">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="settingsBtn">
+      <img class="icons" src="{{url_for('static', filename='settings.png')}}">
+    </button>
+    <button id="hamberger" onclick="openShelf()">
+      <img class="icons" src="{{url_for('static', filename='hamberger.png')}}">
+    </button>
+    <div id="sideShelf">
+      <div id="topSection">
+        <div id="topTopSection">
+          <h1>Saved Footage</h1>
+          <button class="closeBtn" onclick="closeShelf()">
+            <img class="icons" src="{{url_for('static', filename='xOut.png')}}">
+          </button>
+        </div>
+        <div id="searchContainer">
+          <input id="searchField" type="text" placeholder="Search by date...">
+          <img id="searchIcon" class="icons" src="{{url_for('static', filename='search.png')}}">
+        </div>
+      </div>
+      <div id="scrollDiv">
+
+      </div>
+    </div>
+  </body>
+
+
+
+  <script>
+    $("#sideShelf").css("width", "0vw");
+    $("#sideShelf").hide();
+    
+
+    function closeShelf(){
+      $("#sideShelf").animate({width:"0vw"}, "slow", "linear", function(){$("#sideShelf").hide();});
+    }
+
+    function openShelf(){
+      $("#sideShelf").show();
+      $("#sideShelf").animate({width:"25vw"}, "slow", "linear");
+    }
+
+    function zoomIn(){
+      var oldVal = parseInt($("#zoom").attr("value"));
+      if(oldVal < 200){
+        var newVal = oldVal + 1;
+      }else{
+        var newVal = oldVal;
+      }
+      $("#zoom").attr("value", newVal);
+    }
+
+    function zoomOut(){
+      var oldVal = parseInt($("#zoom").attr("value"));
+      if(oldVal > 0){
+        var newVal = oldVal - 1;
+      }else{
+        var newVal = oldVal;
+      }
+      $("#zoom").attr("value", newVal);
+    }
+
+  </script>
+</html>
