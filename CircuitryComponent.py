@@ -1,36 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@AustinNewsom 
-UmbraSky
-/
-texas-toast-security-camera
-Public
-Fork your own copy of UmbraSky/texas-toast-security-camera
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Beta Try the new code view
-texas-toast-security-camera/starting_file.py /
-@AustinNewsom
-AustinNewsom Model 3 final changes
-Latest commit d9a9710 4 minutes ago
- History
- 2 contributors
-@AustinNewsom@UmbraSky
-57 lines (45 sloc)  1.46 KB
- 
-
 ####################################################################################
 # Team Name: Texas Toast
 # Members: Ryan Saffel, Brie Bays, Austin Newsom, Elora Browning
@@ -84,21 +51,3 @@ try:
 except KeyboardInterrupt:
     # reset the GPIO pins
     GPIO.cleanup()
-
-
-
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-texas-toast-security-camera/starting_file.py at Austin_Newsom_Circuit · UmbraSky/texas-toast-security-camera
