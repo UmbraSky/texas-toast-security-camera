@@ -8,89 +8,51 @@
 # Austin Newsom
 # Circuitry Component for PiCamera 
 
-# Notes to Self: Create Diagram for Circuit 
-#                Possibly Enable an alarm system
-
-
-# Code that will activate the green light whenever the program begins running
-
-    # Print message to the terminal saying "Program Started"
-
-    # Code to play a sound when green light activates
-
-    # Code for when the green button is pushed
-
-        # "Manual System Restart" message when button is pushed
-
-# Code that will activate the red light when invalid user input is given (invalid spelling error, unknown command)
-
-    # Print help message to the terminal when invalid input is given 
-    # "Invalid Input given, command is either unknown or spelled incorrectly. Please give a valid input"
-
-    # Code to play a sound when red light activates
-
-# Code that will consistently run the blue right while the program is active
-
-    # Print message to the terminal intermittently saying the program is in "Idle Mode"
-
-    # Code to play a sound when blue light is active
-
-# Code that will activate the yellow light when someone pushes the button
-     
-     # Print message to the terminal "Are you sure you want to terminate the program?"
-
-     # Yellow Light Code stops running if answer is not given in time, but if button is clicked again, program stops
-    
-    
-# Start of Code:
-
 import RPi.GPIO as GPIO
-import time
-import sys
-import signal
-import json
+from time import sleep
 
-greenled =                           # add corresponding led numbers
-redled =
-blueled =
-yellowled =
+# set the LEDD and switch pin numbers
+greenled = 17
+greenbutton = 25
 
-leds = [greenled, redled, blueled, yellowled]
+blueled = 13
+bluebutton = 27
 
-greenButton =                       # add corresponding button numbers
-redButton =
-blueButton =
-yellowButton =
+redled = 23
+redbutton = 6  
 
-buttons = [greenButton, redButton, blueButton, yellowButton]
-
+# use the Broadcom pin mode
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(leds, GPIO.OUT)
-GPIO.setup(buttons, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-while True:
-    if (GPIO.input(greenButton) == GPIO.HIGH):
-        GPIO.output(greenled, GPIO.HIGH)
-        print("System Restarting...")
-    else:
-        GPIO.output(greenled, GPIO.LOW)
+# setup the LED and switch pns
+GPIO.setup(greenled, GPIO.OUT)
+GPIO.setup(greenbutton, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+GPIO.setup(blueled, GPIO.OUT)
+GPIO.setup(bluebutton, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+try:
+    
+    # do this forever
+    while (True):
+        # light the LED when the switch is pressed
+        # turn it off otherwise
+        if (GPIO.input(greenbutton) == GPIO.HIGH):
+            GPIO.output(greenled, GPIO.HIGH)
+            print("Security System Is Active")
+        else:
+            GPIO.output(greenled, GPIO.LOW)
         
-    if (GPIO.input(redButton) == GPIO.HIGH):
-        GPIO.output(redled, GPIO.HIGH)
-    else:
-        GPIO.output(redled, GPIO.LOW)
+        if (GPIO.input(bluebutton) == GPIO.HIGH):
+            GPIO.output(blueled, GPIO.HIGH)
+            print("Click the Red Button to disable the circuit system")
+        else:
+            GPIO.output(blueled, GPIO.LOW)
         
-    if (GPIO.input(blueButton) == GPIO.HIGH):
-        GPIO.output(blueled, GPIO.HIGH)
-    else:
-        GPIO.output(blueled, GPIO.LOW)
+        sleep(0.1)
         
-    if (GPIO.input(yellowButton) == GPIO.HIGH):
-        GPIO.output(yellowled, GPIO.HIGH)
-        print("Are you sure you want to terminate the system?")
-    else:
-        GPIO.output(yellowled, GPIO.LOW)
-        
+except KeyboardInterrupt:
+    GPIO.cleanup()
 
 
 
