@@ -11,47 +11,45 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
-# set the LEDD and switch pin numbers
-greenled = 17
-greenbutton = 25
+# set the LED and switch pin numbers
+led = 17 # blueLED
+ledTwo = 13 #greenLED
+ledThree = 6 #redLED
+button = 25 #greenButton
 
-blueled = 13
-bluebutton = 27
-
-redled = 23
-redbutton = 6  
-
-# use the Broadcom pin mode
+# uses the Broadcom pin mode
 GPIO.setmode(GPIO.BCM)
 
-# setup the LED and switch pns
-GPIO.setup(greenled, GPIO.OUT)
-GPIO.setup(greenbutton, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-GPIO.setup(blueled, GPIO.OUT)
-GPIO.setup(bluebutton, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+# setups the LEDs and switch pins
+GPIO.setup(led, GPIO.OUT)
+GPIO.setup(ledTwo, GPIO.OUT)
+GPIO.setup(ledThree, GPIO.OUT)
+GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 try:
-    
-    # do this forever
+    # blink the LED forever
     while (True):
-        # light the LED when the switch is pressed
-        # turn it off otherwise
-        if (GPIO.input(greenbutton) == GPIO.HIGH):
-            GPIO.output(greenled, GPIO.HIGH)
-            print("Security System Is Active")
-        else:
-            GPIO.output(greenled, GPIO.LOW)
+    # the delay is 3s if the switch is not pressed
+        if (GPIO.input(button) == GPIO.HIGH):
+            delay = 3
+            print("System Active")
+        # otherwise, it's 0.25s
+        elif (GPIO.input(button) == GPIO.LOW):
+            delay = 0.25
+            
+        # blink the LED
+        GPIO.output(led, GPIO.HIGH)
+        GPIO.output(ledTwo, GPIO.HIGH)
+        GPIO.output(ledThree, GPIO.HIGH)
+        sleep(delay)
+        GPIO.output(led, GPIO.LOW)
+        GPIO.output(ledTwo,GPIO.LOW)
+        GPIO.output(ledThree, GPIO.LOW)
+        sleep(delay)
         
-        if (GPIO.input(bluebutton) == GPIO.HIGH):
-            GPIO.output(blueled, GPIO.HIGH)
-            print("Click the Red Button to disable the circuit system")
-        else:
-            GPIO.output(blueled, GPIO.LOW)
-        
-        sleep(0.1)
-        
+    # detect Ctrl+C
 except KeyboardInterrupt:
+    # reset the GPIO pins
     GPIO.cleanup()
 
 
