@@ -250,14 +250,6 @@ input[type="range"]::-moz-range-thumb {
     bottom:3vh;
 }
 
-#settingsBtn{
-    position:absolute;
-    top:1%;
-    right:1%;
-    padding:0px;
-    border:none;
-}
-
 #hamberger{
     position:absolute;
     top:1%;
