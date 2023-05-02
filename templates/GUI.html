@@ -34,9 +34,11 @@
           <div id="panBtnCircle">
             <button class="panBtn" id="panUpBtn">
               <img id="upArrow" class="icons" src="{{url_for('static', filename='upArrow.png')}}">
+              <div id="upClickCorrection"></div>
             </button>
             <button class="panBtn" id="panDownBtn">
               <img id="downArrow" class="icons" src="{{url_for('static', filename='downArrow.png')}}">
+              <div id="downClickCorrection"></div>
             </button>
             <button class="panBtn" id="panLeftBtn">
               <img id="leftArrow" class="icons" src="{{url_for('static', filename='leftArrow.png')}}">
@@ -65,7 +67,6 @@
         </div>
       </div>
       <div id="scrollDiv">
-
       </div>
     </div>
   </body>

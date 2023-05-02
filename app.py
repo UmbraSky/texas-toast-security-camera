@@ -12,10 +12,6 @@ def main():
 def login():
     return render_template("login.html")
 
-@app.route("/settings")
-def settings():
-    return render_template("settings.html")
-
 @app.route("/test_error_<id>")
 def error(id):
     e = int(id)
