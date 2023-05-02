@@ -34,9 +34,11 @@
           <div id="panBtnCircle">
             <button class="panBtn" id="panUpBtn">
               <img id="upArrow" class="icons" src="{{url_for('static', filename='upArrow.png')}}">
+              <div id="upClickCorrection"></div>
             </button>
             <button class="panBtn" id="panDownBtn">
               <img id="downArrow" class="icons" src="{{url_for('static', filename='downArrow.png')}}">
+              <div id="downClickCorrection"></div>
             </button>
             <button class="panBtn" id="panLeftBtn">
               <img id="leftArrow" class="icons" src="{{url_for('static', filename='leftArrow.png')}}">
@@ -48,9 +50,6 @@
         </div>
       </div>
     </div>
-    <button id="settingsBtn">
-      <img class="icons" src="{{url_for('static', filename='settings.png')}}">
-    </button>
     <button id="hamberger" onclick="openShelf()">
       <img class="icons" src="{{url_for('static', filename='hamberger.png')}}">
     </button>
@@ -68,7 +67,6 @@
         </div>
       </div>
       <div id="scrollDiv">
-
       </div>
     </div>
   </body>
@@ -90,23 +88,23 @@
     }
 
     function zoomIn(){
-      var oldVal = parseInt($("#zoom").attr("value"));
+      var oldVal = parseInt($("#zoom").val());
       if(oldVal < 200){
         var newVal = oldVal + 1;
       }else{
         var newVal = oldVal;
       }
-      $("#zoom").attr("value", newVal);
+      $("#zoom").val(newVal);
     }
 
     function zoomOut(){
-      var oldVal = parseInt($("#zoom").attr("value"));
+      var oldVal = parseInt($("#zoom").val());
       if(oldVal > 0){
         var newVal = oldVal - 1;
       }else{
         var newVal = oldVal;
       }
-      $("#zoom").attr("value", newVal);
+      $("#zoom").val(newVal);
     }
 
   </script>
