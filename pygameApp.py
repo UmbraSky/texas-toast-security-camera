@@ -1,4 +1,4 @@
-import pygame
+import pygame, os
 from bries_work import briesStuff
  
 # Define some colors
@@ -11,12 +11,18 @@ SALMON = (202, 63, 66)
 ORANGEYRED = (233, 41, 33)
 RED = (255, 0, 21)
 MAROON = (132, 14, 1)
- 
+
+os.environ['SDL_VIDEO_CENTERED'] = '1'
+
 pygame.init()
- 
+
+
+info = pygame.display.Info()
+screen_width, screen_height = info.current_w,info.current_h
+
 # Set the width and height of the screen [width, height]
-size = (700, 500)
-screen = pygame.display.set_mode(size)
+size = (screen_width, screen_height)
+screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
  
 pygame.display.set_caption("My Game")
  
@@ -36,23 +42,18 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
- 
-    # --- Game logic should go here
- 
-    # --- Screen-clearing code goes here
- 
-    # Here, we clear the screen to white. Don't put other drawing commands
-    # above this, or they will be erased with this command.
- 
-    # If you want a background image, replace this clear with blit'ing the
-    # background image.
+
+    # -- clear the screen
     screen.fill(RED)
  
-    # --- Drawing code should go here
+    # -- put stuff on screen
+
+    # the camera footage
     result = briesStuff()
-    screen.blit(result, (0,0))
+    screen.blit(result, (100,0))
+
  
-    # --- Go ahead and update the screen with what we've drawn.
+    # -- update the screen
     pygame.display.flip()
  
     # --- Limit to 60 frames per second
