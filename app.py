@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, session, abort
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, session, abort, g, Response
 
 app = Flask(__name__)
+app.secret_key = "jlsak6jfl4kasj121fllhi"
 
-app.secret_key = "jlsakdjflk;asjdfllhi"
 
 @app.route("/")
 def main():
@@ -11,6 +11,13 @@ def main():
 @app.route("/login")
 def login():
     return render_template("login.html")
+
+@app.route("/video")
+def video():
+    import bries_work
+    bries_work.briesVars()
+    feed = bries_work.briesLoop()
+    return Response(feed, mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/test_error_<id>")
 def error(id):
@@ -81,7 +88,6 @@ def internal_server_error(error):
 def not_implemented(error):
     print("501")
     return render_template("error.html", code = "501"), 501
-
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", debug=True)
