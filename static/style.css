@@ -4,15 +4,15 @@ html{
     --mainTopMargin:5vh;
 
     /* Custom Colors */
-    --darkest : #1A1110;
-    --darkerGray : #7F7373;
-    --lighterGray : #B6C0BD;
-    --offWhite : #ECE1E0;
-    --pink : #FFD1DF;
-    --salmon : #CA3F42;
-    --orangeyRed: #E92921;
-    --red : #FF0117;
-    --maroon : #840E01;
+    --darkest : #1a1110;
+    --darkerGray : #7f7373;
+    --lighterGray : #b6c0bd;
+    --offWhite : #ece1e0;
+    --pink : #ffd1df;
+    --salmon : #ca3f42;
+    --orangeyRed: #e92921;
+    --red : #ff0015;
+    --maroon : #840e01;
 }
 
 body{
