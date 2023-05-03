@@ -56,7 +56,14 @@ while not done:
         result, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun)
     else:
         result, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out)
-    screen.blit(result, (100,0))
+    
+    camera_frame_width = frame_size[0]
+    camera_frame_height = frame_size[1]
+
+    camera_left = (screen_width * 0.5) - (camera_frame_width * 0.5)
+    camera_top = screen_height * 0.05
+    
+    screen.blit(result, (camera_left, camera_top))
 
  
     # -- update the screen
@@ -64,6 +71,10 @@ while not done:
  
     # --- Limit to 60 frames per second
     clock.tick(60)
+    
+    pressedKeys = pygame.key.get_pressed()
+    if pressedKeys[pygame.K_ESCAPE]:
+        done = True
  
 # Close the window and quit.
 pygame.quit()
