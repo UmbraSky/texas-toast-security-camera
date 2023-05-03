@@ -32,8 +32,11 @@ done = False
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
-# keeps track of if brie's stuff should still be accumulating frames
-recording = False
+# the equivalent of the order of execution being within the while 
+# true loop
+recording = True
+# a variable to have the stuff before Brie's loop only fire once
+firstRun = True
 # -------- Main Program Loop -----------
 
 
@@ -49,7 +52,10 @@ while not done:
     # -- put stuff on screen
 
     # the camera footage
-    result = briesStuff()
+    if firstRun == True:
+        result, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun)
+    else:
+        result, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out)
     screen.blit(result, (100,0))
 
  
