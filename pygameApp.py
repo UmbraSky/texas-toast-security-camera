@@ -121,21 +121,32 @@ while not done:
     camera_left = (screen_width * 0.5) - (camera_frame_width * 0.5)
     camera_top = screen_height * 0.05
     
+    sliderValue = 1
+    show = (0, 0, camera_frame_width, camera_frame_height)
+
     if result != None:
+        result = pygame.transform.scale(result, ((camera_frame_width * sliderValue),(camera_frame_height * sliderValue)))
         lastFrame = result
-        screen.blit(result, (camera_left, camera_top))
+        screen.blit(result, (camera_left, camera_top), show)
     else:
-        screen.blit(lastFrame, (camera_left, camera_top))
+        screen.blit(lastFrame, (camera_left, camera_top), show)
 
     # button for stop/start recording
 
     startAndStopBtn = Button(((screen_width * 0.5) - ((camera_frame_width * 0.16) * 0.5)), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.05)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), 'static/recording.png', "static/notRecording.png", "icon", startAndStop, startAndStopMode)
-
     buttons.append(startAndStopBtn)
 
     # button for deactivate/activate intruder recognition
-    deactivateAndActivateBtn = Button(((screen_width * 0.5) - ((camera_frame_width * 0.16) * 0.5)), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.05) + ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25) + (screen_height * 0.05)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), "static/sirenOn.png", "static/siren.png", "icon", deactivateAndActivate, deactivateAndActivateMode)
+    deactivateAndActivateBtn = Button(((screen_width * 0.5) - ((camera_frame_width * 0.16) * 0.5)), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.1) + ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25) + (screen_height * 0.05)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), "static/sirenOn.png", "static/siren.png", "icon", deactivateAndActivate, deactivateAndActivateMode)
     buttons.append(deactivateAndActivateBtn)
+    
+
+    # logo
+    logo = pygame.image.load('static/logo.png')
+    logo = pygame.transform.scale(logo, ((screen_width * 0.25), (screen_height * 0.2)))
+    screen.blit(logo, ((screen_width - (screen_width * 0.26) - (screen_width * 0.005)), 0))
+
+
 
     for button in buttons:
         button.process(screen)
