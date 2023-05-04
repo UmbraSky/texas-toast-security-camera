@@ -97,7 +97,7 @@ while not done:
     # button for start/stop recording
 
 
-    startAndStopBtn = Button(((screen_width * 0.5) - ((camera_frame_width * 0.16) * 0.5)), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.05)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), '()', startAndStop)
+    startAndStopBtn = Button(((screen_width * 0.5) - ((camera_frame_width * 0.16) * 0.5)), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.05)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), 'static/recording.png', "icon", startAndStop)
     startAndStopBtn.render()
     buttons.append(startAndStopBtn)
 
