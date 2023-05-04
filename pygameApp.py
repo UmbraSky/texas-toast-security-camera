@@ -67,19 +67,19 @@ def startAndStop():
     else:
         btnTimer += 1
 
-intruderRecog = True
+recogOn = True
 def deactivateAndActivate():
-    global intruderRecog
+    global recogOn
     global btnTimer
     global deactivateAndActivateMode
     if btnTimer == 0:
-        if intruderRecog == True:
-            intruderRecog = False
+        if recogOn == True:
+            recogOn = False
             deactivateAndActivateBtn.mode = "alt"
             deactivateAndActivateMode = "alt"
             print("diactivated intruder recognition...")
         else:
-            intruderRecog = True
+            recogOn = True
             deactivateAndActivateBtn.mode = "main"
             deactivateAndActivateMode = "main"
             print("reactivated intruder recognition...")
@@ -111,9 +111,9 @@ while not done:
 
     # the camera footage
     if firstRun == True:
-        result, firstRun, camOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, camOn)
+        result, firstRun, camOn, recogOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, camOn, recogOn)
     else:
-        result, firstRun, camOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, camOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out)
+        result, firstRun, camOn, recogOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, camOn, recogOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out)
     
     camera_frame_width = frame_size[0]
     camera_frame_height = frame_size[1]
