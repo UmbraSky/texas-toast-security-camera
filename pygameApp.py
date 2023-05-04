@@ -1,16 +1,8 @@
 import pygame, os
 from bries_work import briesStuff
- 
-# Define some colors
-DARKEST = (26, 17, 16)
-DARKERGRAY = (127, 115, 115)
-LIGHTERGRAY = (182, 192, 189)
-OFFWHITE = (236, 225, 224)
-PINK = (255, 209, 223)
-SALMON = (202, 63, 66)
-ORANGEYRED = (233, 41, 33)
-RED = (255, 0, 21)
-MAROON = (132, 14, 1)
+from buttonCreater import Button
+from colors import *
+
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 
@@ -32,11 +24,39 @@ done = False
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
+# a timer to stop buttons from pressing multiple times in a press
+btnTimer = 0
+
+# a list of all buttons
+buttons = []
+
 # the equivalent of the order of execution being within the while 
 # true loop
 recording = True
 # a variable to have the stuff before Brie's loop only fire once
 firstRun = True
+
+# holds the last frame shown for when the video is paused
+lastFrame = None
+
+camOn = True
+#--- button functions ----
+def startAndStop():
+    global camOn
+    global btnTimer
+    if btnTimer == 0:
+        if camOn == True:
+            camOn = False
+            print("manually stopped recording...")
+        else:
+            camOn = True
+            print("manually continued recording...")
+        btnTimer += 1
+    elif btnTimer == 50:
+        btnTimer = 0
+    else:
+        btnTimer += 1
+
 # -------- Main Program Loop -----------
 
 
@@ -58,9 +78,9 @@ while not done:
 
     # the camera footage
     if firstRun == True:
-        result, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun)
+        result, firstRun, camOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, camOn)
     else:
-        result, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out)
+        result, firstRun, camOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out = briesStuff(recording, firstRun, camOn, cap,  face_cascade,  body_cascade,  detection,  detection_stopped_time, timer_started,  SECONDS_TO_RECORD_AFTER_DETECTION,  frame_size, fourcc, out)
     
     camera_frame_width = frame_size[0]
     camera_frame_height = frame_size[1]
@@ -68,8 +88,21 @@ while not done:
     camera_left = (screen_width * 0.5) - (camera_frame_width * 0.5)
     camera_top = screen_height * 0.05
     
-    screen.blit(result, (camera_left, camera_top))
+    if result != None:
+        lastFrame = result
+        screen.blit(result, (camera_left, camera_top))
+    else:
+        screen.blit(lastFrame, (camera_left, camera_top))
 
+    # button for start/stop recording
+
+
+    startAndStopBtn = Button(((screen_width * 0.5) - ((camera_frame_width * 0.16) * 0.5)), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.05)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), '()', startAndStop)
+    startAndStopBtn.render()
+    buttons.append(startAndStopBtn)
+
+    for button in buttons:
+        button.process(screen)
  
     # -- update the screen
     pygame.display.flip()
@@ -83,3 +116,4 @@ while not done:
  
 # Close the window and quit.
 pygame.quit()
+
