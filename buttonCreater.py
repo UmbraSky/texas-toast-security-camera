@@ -2,7 +2,7 @@ import pygame
 from colors import *
 
 class Button():
-    def __init__(self, x, y, width, height, buttonContent='Button', buttonType="text", onclickFunction=None, onePress=False):
+    def __init__(self, x, y, width, height, buttonContent='Button', altContent = None, buttonType="text", onclickFunction=None, mode = "main", onePress=False):
         self.x = x
         self.y = y
         self.width = width
@@ -11,8 +11,18 @@ class Button():
         self.onePress = onePress
         self.alreadyPressed = False
         self.font = pygame.font.SysFont('Arial', 40)
-        self.buttonContent = buttonContent
+        self.buttonSurface = pygame.Surface((self.width, self.height))
+        self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
+        if buttonType == "icon":
+            self.buttonContent = pygame.image.load(buttonContent)
+            self.buttonContent = pygame.transform.scale(self.buttonContent, (self.width/2, self.width/2))
+            self.altContent = pygame.image.load(altContent)
+            self.altContent = pygame.transform.scale(self.altContent, (self.width/2, self.width/2))
+        else:
+            self.buttonContent = self.font.render(self.buttonContent, True, (20, 20, 20))
+            self.altContent = self.font.render(self.altContent, True, (20, 20, 20))
         self.buttonType = buttonType
+        self.mode = mode
 
         self.fillColors = {
             'normal': DARKERGRAY,
@@ -20,17 +30,8 @@ class Button():
             'pressed': LIGHTERGRAY,
         }
     
-    def render(self):
-        self.buttonSurface = pygame.Surface((self.width, self.height))
-        self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-        if self.buttonType == "text":
-            self.buttonSurf = self.font.render(self.buttonContent, True, (20, 20, 20))
-        elif self.buttonType == "icon":
-            self.buttonSurf = pygame.image.load(self.buttonContent)
-            self.buttonSurf = pygame.transform.scale(self.buttonSurf, (self.buttonRect.width/2, self.buttonRect.width/2))
 
-    
     def process(self, screen):
         mousePos = pygame.mouse.get_pos()
         self.buttonSurface.fill(self.fillColors['normal'])
@@ -46,8 +47,14 @@ class Button():
             else:
                 self.alreadyPressed = False
         
-        self.buttonSurface.blit(self.buttonSurf, [
-            self.buttonRect.width/2 - self.buttonSurf.get_rect().width/2,
-            self.buttonRect.height/2 - self.buttonSurf.get_rect().height/2
-        ])
+        if self.mode == "alt":
+            self.buttonSurface.blit(self.altContent, [
+                self.buttonRect.width/2 - self.altContent.get_rect().width/2,
+                self.buttonRect.height/2 - self.altContent.get_rect().height/2
+            ])
+        else:
+            self.buttonSurface.blit(self.buttonContent, [
+                self.buttonRect.width/2 - self.buttonContent.get_rect().width/2,
+                self.buttonRect.height/2 - self.buttonContent.get_rect().height/2
+            ])
         screen.blit(self.buttonSurface, self.buttonRect)
