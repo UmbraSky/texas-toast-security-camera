@@ -47,9 +47,14 @@ while not done:
             done = True
 
     # -- clear the screen
-    screen.fill(RED)
+    screen.fill(ORANGEYRED)
  
     # -- put stuff on screen
+
+    # background image
+    bg = pygame.image.load('static/bg.png')
+    bg = pygame.transform.scale(bg, (screen_width, screen_height))
+    screen.blit(bg, (0, 0))
 
     # the camera footage
     if firstRun == True:
