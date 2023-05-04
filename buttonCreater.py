@@ -16,8 +16,11 @@ class Button():
         if buttonType == "icon":
             self.buttonContent = pygame.image.load(buttonContent)
             self.buttonContent = pygame.transform.scale(self.buttonContent, (self.width/2, self.width/2))
-            self.altContent = pygame.image.load(altContent)
-            self.altContent = pygame.transform.scale(self.altContent, (self.width/2, self.width/2))
+            if altContent != None:
+                self.altContent = pygame.image.load(altContent)
+                self.altContent = pygame.transform.scale(self.altContent, (self.width/2, self.width/2))
+            else:
+                self.altContent = None
         else:
             self.buttonContent = self.font.render(self.buttonContent, True, (20, 20, 20))
             self.altContent = self.font.render(self.altContent, True, (20, 20, 20))

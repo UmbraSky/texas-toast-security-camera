@@ -88,6 +88,53 @@ def deactivateAndActivate():
         btnTimer = 0
     else:
         btnTimer += 1
+
+
+sliderValue = 1
+leftOffset = 0
+topOffset = 0
+def zoomIn():
+    global sliderValue
+    if sliderValue >= 3:
+        sliderValue = 3
+    else:
+        sliderValue += 0.01
+
+def zoomOut():
+    global sliderValue
+    if sliderValue <= 1:
+        sliderValue = 1
+    else:
+        sliderValue -= 0.01
+
+def panDown():
+    global topOffset
+    if topOffset >= (camera_frame_height * sliderValue):
+        topOffset = (camera_frame_height * sliderValue)
+    else:
+        topOffset += 1
+
+def panUp():
+    global topOffset
+    if topOffset <= 0:
+        topOffset = 0
+    else:
+        topOffset -= 1
+
+def panRight():
+    global leftOffset
+    if leftOffset >= (camera_frame_width * sliderValue):
+        leftOffset = (camera_frame_width * sliderValue)
+    else:
+        leftOffset += 1
+
+def panLeft():
+    global leftOffset
+    if leftOffset <= 0:
+        leftOffset = 0
+    else:
+        leftOffset -= 1
+
     
 
 # -------- Main Program Loop -----------
@@ -121,7 +168,6 @@ while not done:
     camera_left = (screen_width * 0.5) - (camera_frame_width * 0.5)
     camera_top = screen_height * 0.05
     
-    sliderValue = 1
     show = (0, 0, camera_frame_width, camera_frame_height)
 
     if result != None:
@@ -137,8 +183,17 @@ while not done:
     buttons.append(startAndStopBtn)
 
     # button for deactivate/activate intruder recognition
-    deactivateAndActivateBtn = Button(((screen_width * 0.5) - ((camera_frame_width * 0.16) * 0.5)), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.1) + ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25) + (screen_height * 0.05)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), "static/sirenOn.png", "static/siren.png", "icon", deactivateAndActivate, deactivateAndActivateMode)
+    deactivateAndActivateBtn = Button(((screen_width * 0.5) - ((camera_frame_width * 0.16) * 0.5)), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.05) + ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25) + (screen_height * 0.1)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), "static/sirenOn.png", "static/siren.png", "icon", deactivateAndActivate, deactivateAndActivateMode)
     buttons.append(deactivateAndActivateBtn)
+
+    # button for zoom in    
+    zoomInBtn = Button(((screen_width * 0.5) - (((camera_frame_width * 0.16) * 0.5) - (screen_width * 0.1))), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.05) + ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25) + (screen_height * 0.01)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), "static/zoomIn.png", "static/zoomIn.png", "icon", zoomIn)
+    buttons.append(zoomInBtn)
+
+    # button for zoom out
+    zoomOutBtn = Button(((screen_width * 0.5) - (((camera_frame_width * 0.16) * 0.5) + (screen_width * 0.1))), ((0.05 * screen_height) + camera_frame_height + (screen_height * 0.05) + ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25) + (screen_height * 0.01)), (camera_frame_width * 0.16), ((screen_height - (screen_height * 0.05) - camera_frame_height) * 0.25), "static/zoomOut.png", "static/zoomOut.png", "icon", zoomOut)
+    buttons.append(zoomOutBtn)
+
     
 
     # logo
